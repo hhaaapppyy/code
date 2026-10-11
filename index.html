@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>文析 · 主动阅读实验室</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="shell">
+    <aside class="sidebar">
+      <a class="brand" href="#">文<span>析</span><small>主动阅读实验室</small></a>
+      <button class="upload" id="uploadBtn">＋ 导入一篇文献</button>
+      <input id="fileInput" type="file" accept=".txt,.md,.pdf" hidden />
+      <nav>
+        <button class="nav active" data-view="read">◉　正在阅读</button>
+        <button class="nav" data-view="archive">▣　阅读档案 <b id="archiveCount">0</b></button>
+        <button class="nav" data-view="notes">✦　随手笔记</button>
+      </nav>
+      <section class="focus-card">
+        <p>今日阅读</p><strong id="focusMinutes">00:00</strong><span>把第一个段落读完就很好。</span>
+      </section>
+    </aside>
+    <section class="workspace">
+      <header>
+        <div><p class="eyebrow">GUIDED PAPER READING</p><h1 id="paperTitle">从问题开始，读懂一篇文献</h1></div>
+        <div class="progress"><span id="progressText">预习</span><div><i id="progressBar"></i></div></div>
+      </header>
+      <section id="readView" class="view">
+        <div class="preflight panel" id="preflight">
+          <div class="section-label">01 / 阅读预习</div><h2>先建立一点熟悉感</h2>
+          <p>把陌生概念先变成可辨认的路标。点选你已经掌握的词，或给其他词添加自己的解释。</p>
+          <div class="terms" id="terms"></div>
+          <div class="preflight-actions"><input id="customTerm" placeholder="添加术语或缩写" /><button class="secondary" id="addTerm">添加</button><button class="primary" id="startReading">开始阅读 →</button></div>
+        </div>
+        <div class="reading-grid hidden" id="readingStage">
+          <article class="paper panel">
+            <div class="paper-meta"><span id="sectionNo">01</span><span id="sectionName">摘要 / 研究动机</span><button id="translateBtn">中 / EN</button></div>
+            <h2 id="sectionTitle"></h2><div id="paperText" class="paper-text"></div>
+            <div class="paper-actions"><button class="secondary" id="noteBtn">＋ 记下此处想法</button><button class="secondary" id="lookupBtn">⌕ 查询概念</button></div>
+          </article>
+          <aside class="coach panel">
+            <p class="coach-label">停下来想一想</p><h3 id="questionTitle"></h3><p id="questionHint"></p>
+            <textarea id="answer" placeholder="不用追求完美，先写下你此刻的理解…"></textarea>
+            <button class="primary full" id="submitAnswer">提交思考并获得反馈</button><div id="feedback" class="feedback hidden"></div>
+            <button class="next hidden full" id="nextSection">继续下一个板块 →</button>
+          </aside>
+        </div>
+        <section id="complete" class="complete panel hidden"><div class="section-label">阅读完成</div><h2>你不只是读过，你已经留下了自己的路径。</h2><p>现在用一分钟完成迁移：这个研究的思路，能如何作用于你的课题？</p><textarea id="transfer" placeholder="例如：我可以把它的……方法迁移到……问题中"></textarea><button class="primary" id="saveArchive">保存完整阅读档案</button></section>
+      </section>
+      <section id="archiveView" class="view hidden"><div class="panel archive-head"><div class="section-label">READING MEMORY</div><h2>你的阅读档案</h2><p>每一篇都保留你的原始回答、补充反馈与迁移思考。</p></div><div id="archiveList" class="archive-list"></div></section>
+      <section id="notesView" class="view hidden"><div class="panel notes"><div class="section-label">QUICK NOTE</div><h2>随手记下，不打断阅读</h2><textarea id="quickNote" placeholder="一个疑问、一个联系、一个待验证的想法…"></textarea><button class="primary" id="saveNote">保存笔记</button><div id="noteList"></div></div></section>
+    </section>
+  </main>
+  <dialog id="lookupDialog"><button class="close" id="closeLookup">×</button><p class="section-label">CONCEPT LOOKUP</p><h2 id="lookupTitle">概念速查</h2><p id="lookupContent">选择文中的术语后，可在这里记录定义、出处和与你研究的联系。</p><input id="lookupInput" placeholder="输入概念，如 self-attention" /><button class="primary" id="doLookup">保存查询卡片</button></dialog>
+  <script src="app.js"></script>
+</body>
+</html>
